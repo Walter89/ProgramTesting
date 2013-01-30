@@ -1,3 +1,4 @@
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -13,7 +14,7 @@ import junit.framework.TestSuite;
 public class TriangleTest extends TestCase
 {
 	private Triangle rightAngledTriangle;
-
+	private Triangle imposTriangle;
 	/**
 	 * Constructs a test case with the given name.
 	 */
@@ -51,6 +52,28 @@ public class TriangleTest extends TestCase
 		assertEquals("Should return 'right-angled'", "right-angled", rightAngledTriangle.classify());			
 	}
 
+	 public void testIsImpossible()
+		{
+		 assertTrue("Should return true",
+					imposTriangle.isImpossible());
+			assertEquals("Should return 'right-angled'", "right-angled", rightAngledTriangle.classify());					
+			imposTriangle=new Triangle(-1,-1,-1);
+			assertTrue("Should return true",
+					imposTriangle.isImpossible());
+			assertEquals("Should return 'right-angled'", "right-angled", rightAngledTriangle.classify());					
+		
+			imposTriangle=new Triangle(2,4,5);
+			assertTrue("Should return false",
+					!imposTriangle.isImpossible());
+			assertEquals("Should return 'right-angled'", "right-angled", rightAngledTriangle.classify());					
+		
+			imposTriangle=new Triangle(2,2,5);
+			assertTrue("Should return true",
+					imposTriangle.isImpossible());
+			assertEquals("Should return 'right-angled'", "right-angled", rightAngledTriangle.classify());					
+		
+		
+		}
 	/**
 	 * Creates a test suite. You can use this if you have a hierarchy of 
 	 * suites where a suite higher in the hierarchy can have 
