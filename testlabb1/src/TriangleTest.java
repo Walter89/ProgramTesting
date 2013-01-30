@@ -50,6 +50,13 @@ public class TriangleTest extends TestCase
 		            rightAngledTriangle.isRightAngled());
 		assertEquals("Should return 'right-angled'", "right-angled", rightAngledTriangle.classify());			
 	}
+	
+	public void testIsImpossible()
+	{
+		assertTrue("Should return true for a right-angled triangle",
+		            rightAngledTriangle.isRightAngled());
+		assertEquals("Should return 'right-angled'", "right-angled", rightAngledTriangle.classify());			
+	}
 
 	/**
 	 * Creates a test suite. You can use this if you have a hierarchy of 
