@@ -52,12 +52,7 @@ public class TriangleTest extends TestCase
 		assertEquals("Should return 'right-angled'", "right-angled", rightAngledTriangle.classify());			
 	}
 	
-	public void testIsImpossible()
-	{
-		assertTrue("Should return true for a right-angled triangle",
-		            rightAngledTriangle.isRightAngled());
-		assertEquals("Should return 'right-angled'", "right-angled", rightAngledTriangle.classify());			
-	}
+	
 
 	 public void testIsImpossible()
 		{
