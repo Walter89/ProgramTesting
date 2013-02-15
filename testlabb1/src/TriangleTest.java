@@ -47,9 +47,9 @@ public class TriangleTest extends TestCase {
 		EC5=new Triangle(0,1,1);//EP invalid
 		EC6=new Triangle(1,1,-1);//EP invalid
 		EC7=new Triangle(1,-1,-1);//EP invalid
-		EC4 = new Triangle(2, 4, 5);//valid, BVA 			vet ej varför vi har denna
+		EC4 = new Triangle(2, 4, 5);//valid, BVA 			
 		EC8 = new Triangle(2, 2, 5);//invalid,BVA
-		EC9 = new Triangle(2, 2, 2);//valid EP				vet ej varför vi har denna
+		EC9 = new Triangle(2, 2, 2);//valid EP				
 		//EC10 = new Triangle(2, "k", 2);//invalid EP
 		EC16 = new Triangle(5, 4, 5);//valid: (EP, isossceles, not equilateral, isImpossible)
 		EC19 = new Triangle(5, 4, 3);//valid: BVA/(EP, right-angled, not isossceles, not scalene)
