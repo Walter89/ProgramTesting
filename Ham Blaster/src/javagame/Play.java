@@ -1,5 +1,7 @@
 package javagame;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -22,6 +24,7 @@ public class Play extends BasicGameState {
 	float centerX = 0;
 	float centerY = 0;
 	private Bird bird;
+	private ArrayList<FixedObject> fixedObjects = new ArrayList<FixedObject>();
 
 	public Play(int state) {
 	}
@@ -57,7 +60,25 @@ public class Play extends BasicGameState {
 		bucky = movingDown; // by default as soon as game loads, bucky will be
 							// facing down
 
+	Image[] walkUp2 = { new Image("res/bird.png"), new Image("res/bird.png") }; 
+		
+		Image[] walkDown2 = { new Image("res/bird.png"),
+				new Image("res/bird.png") };
+		Image[] walkLeft2 = { new Image("res/bird.png"),
+				new Image("res/bird.png") };
+		Image[] walkRight2 = { new Image("res/bird.png"),
+				new Image("res/bird.png") };
+		
 		bird = new Bird(duration, 100, 100);
+		setFixedObjects();
+	}
+
+	private void setFixedObjects() throws SlickException {
+		Image img = new Image("res/rock.png");
+		for (int i = 0; i < 4; i++) {
+			fixedObjects.add(new FixedObject(100 * i, 100 * i, img));
+		}
+
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
@@ -67,39 +88,37 @@ public class Play extends BasicGameState {
 		float drawY = centerY;
 		float drawBuckyY = 0;
 		float drawBuckyX = 0;
-		
-		
 
 		if (buckyPositionY < -440) {
-			
-			drawBuckyY = shiftY + (-440 - buckyPositionY);
-			
-		}else if (buckyPositionY > 0) {
 
-			drawBuckyY = shiftY -  buckyPositionY;
-		}else{
+			drawBuckyY = shiftY + (-440 - buckyPositionY);
+
+		} else if (buckyPositionY > 0) {
+
+			drawBuckyY = shiftY - buckyPositionY;
+		} else {
 			centerY = buckyPositionY;
 			drawBuckyY = shiftY;
 		}
-		
-		
-	if (buckyPositionX > 0) {
-		drawBuckyX = shiftX - buckyPositionX;
-		
-	}else if (buckyPositionX < -560) {
-			drawBuckyX = shiftX + (-560 - buckyPositionX);
-			
-		}else{
+
+		if (buckyPositionX > 0) {
+			drawBuckyX = shiftX - buckyPositionX;
+
+		} else if (buckyPositionX < -worldMap.getWidth() + 640) {
+			drawBuckyX = shiftX + (-worldMap.getWidth() + 640 - buckyPositionX);
+
+		} else {
 			centerX = buckyPositionX;
 			drawBuckyX = shiftX;
-	}
+		}
 		worldMap.draw(centerX, centerY);
 
 		bird.draw(centerX, centerY);
 		bucky.draw(drawBuckyX, drawBuckyY);
-		g.drawString("Buckys X: " + centerX + "\nBuckys Y: " + buckyPositionY,
-				400, 20); // indicator to see where bucky is
-							// in his world
+		this.drawFixedObejects();
+		g.drawString("Buckys X: " + buckyPositionX + "\nBuckys Y: "
+				+ buckyPositionY, 400, 20); // indicator to see where bucky is
+											// in his world
 
 		// when they press escape
 		if (quit == true) {
@@ -170,10 +189,56 @@ public class Play extends BasicGameState {
 				System.exit(0);
 			}
 		}
-		bird.update(delta);
+		bird.update(delta,this);
+	}
+
+	public void drawFixedObejects() {
+		for (FixedObject obj : fixedObjects) {
+			obj.draw(centerX, centerY);
+		}
+
 	}
 
 	public int getID() {
 		return 1;
 	}
+	//check objects to the Left
+	public boolean collisionDetectionLeft(MovingObjects moving) {
+		for (FixedObject obj : fixedObjects) {
+		if(moving.getPositionX()<obj.getPositionX()){
+			
+		}
+		
+		}
+		
+		return false;
+
+	}
+	//check objects to the Right
+		public boolean collisionDetectionRight(MovingObjects moving) {
+			
+			
+			
+			
+			return false;
+
+		}
+		//check objects to the Down
+		public boolean collisionDetectionDown(MovingObjects moving) {
+			
+			
+			
+			
+			return false;
+
+		}
+		//check objects to the Up
+		public boolean collisionDetectionUp(MovingObjects moving) {
+			
+			
+			
+			
+			return false;
+
+		}
 }
